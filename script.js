@@ -1,8 +1,9 @@
 ﻿const API_URL = 'https://paceman.gg/api/ars/liveruns';
 const TOP_RUNNERS_TXT = '/top_runners.txt';
+const BACKUP_STREAMING_LOGINS = null;
 const DEFAULT_CHANNEL = "nofearr1337";
 const TWITCH_API_URL = 'https://api.twitch.tv/helix/streams?';
-const TWITCH_CLIENT_ID = 'kf2y8l79x9qo5mho72scbo6ihfw2kg';
+const TWITCH_CLIENT_ID = 'tyeyyg0yk84cyvevw426mz0k8iz9q3';
 const PARENT_DOMAIN = "hlswan.github.io";
 const SPLITS = [
     { label: "Nether Enter", key: "rsg.enter_nether" },
@@ -56,7 +57,7 @@ let currentMainChannel = DEFAULT_CHANNEL;
 let currentSideChannel = null;
 
 let topRunnersOrder = [];
-let topRunnersSet = new Set();
+let TOP_RUNNER_LOGINS_SET = new Set();
 
 
 document.getElementById("settings-btn").onclick = () => {
@@ -113,8 +114,19 @@ function isOnPace(run) {
     return getRunPaceTier(run) < PACE_THRESHOLDS.length;
 }
 
-function runisLive(run) {
-    return !!run.user?.liveAccount;
+function runisLive(run, increment) {
+    if (increment >= 100) { 
+        BACKUP_STREAMING_LOGINS = new Set();
+    }
+    if (run.user?.liveAccount) {
+        TOP_RUNNER_LOGINS_SET.forEach(item => {
+            if (item.toLowerCase() === run.user.liveAccount.toLowerCase()) {
+                BACKUP_STREAMING_LOGINS.add(run.user.liveAccount.toLowerCase());
+            }
+        });
+        return true;
+    }
+    return false;
 }
 
 function filterToLiveRuns(runs) {
@@ -156,7 +168,8 @@ async function findLiveTopRunners(topList) {
         const res = await fetch(url, { headers });
         if (!res.ok) {
             console.warn('Twitch API responded with', res.status, res.statusText);
-            try { const body = await res.text(); console.warn('Twitch body:', body); } catch (_) {}
+            try { const body = await res.text(); console.warn('Twitch body:', body); } catch (_) { }
+            streamingLogins = useBackupStreamingLogins(streamingLogins);
         } else {
             const data = await res.json();
             (data.data || []).forEach(s => {
@@ -178,6 +191,12 @@ async function findLiveTopRunners(topList) {
         }
     }
     return result;
+}
+
+//If twitch API fails get the backup list of logins.
+function useBackupStreamingLogins(streamingLogins) {
+    streamingLogins = new Set([...BACKUP_STREAMING_LOGINS]);
+    return streamingLogins;
 }
 
 function getRunProgress(run) {
@@ -253,7 +272,7 @@ async function loadTopRunnersList() {
         const txt = await res.text();
         const lines = txt.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
         topRunnersOrder = lines;
-        topRunnersSet = new Set(lines.map(s => s.toLowerCase()));
+        TOP_RUNNER_LOGINS_SET = new Set(lines.map(s => s.toLowerCase()));
         return lines;
     } catch (e) {
         console.warn("Failed to load top_runners.txt", e);

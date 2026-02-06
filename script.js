@@ -1,6 +1,6 @@
 ﻿const API_URL = 'https://paceman.gg/api/ars/liveruns';
 const TOP_RUNNERS_TXT = '/top_runners.txt';
-const BACKUP_STREAMING_LOGINS = null;
+const BACKUP_STREAMING_LOGINS = new Set();
 const DEFAULT_CHANNEL = "nofearr1337";
 const TWITCH_API_URL = 'https://api.twitch.tv/helix/streams?';
 const TWITCH_CLIENT_ID = 'tyeyyg0yk84cyvevw426mz0k8iz9q3';

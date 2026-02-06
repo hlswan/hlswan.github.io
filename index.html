@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <title>RSG TV</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>
+            RSG TV
+            <span class="subtitle">by hlswan</span>
+        </h1>
+        <button id="settings-btn">⚙️ Settings</button>
+
+        <div id="settings-panel" class="hidden">
+            <label for="iframe-limit">Max Cached Iframes:</label>
+            <input type="number" id="iframe-limit" min="1" max="30" value="10">
+            <button id="save-settings">Save</button>
+        </div>
+    </header>
+
+    <div class="stream-wrapper">
+        <div id="stream" class="stream single">
+            <div class="player">
+                <iframe id="twitch-player-main"
+                        src="https://player.twitch.tv/?channel=nofearr1337&parent=hlswan.github.io&muted=true"
+                        scrolling="no" frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="player hidden" id="side-player-wrapper">
+                <iframe id="twitch-player-side"
+                        src="about:blank"
+                        scrolling="no" frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden container used for warming cached top-runner iframes -->
+    <div id="iframe-cache" class="hidden" aria-hidden="true"></div>
+
+    <section class="runs">
+        <h2>Live RSG Runs</h2>
+        <div id="runs-list">Loading runs...</div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+

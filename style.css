@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'Mojangles';
+    src: url('fonts/seven.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    background: #0f172a;
+    color: midnightblue;
+    font-family: 'Mojangles';
+}
+
+.site-header {
+    text-align: left;
+    margin: 20px 0;
+    padding: 0 16px; /* some horizontal padding i think */
+}
+
+.site-header h1 {
+    font-family: 'Mojangles'; /* same as your RSG TV font */
+    font-size: 3rem; /* big, eye-catching */
+    color: grey; /* white for main title */
+    margin: 0;
+    line-height: 1.2;
+}
+
+
+.site-header .subtitle {
+    display: block;
+    font-family: 'Mojangles'; /* simpler font for subtitle */
+    font-size: 1rem; /* smaller */
+    color: dimgray; /* grey text */
+    font-weight: normal;
+    margin-top: 3px;
+}
+
+
+.stream-wrapper {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+
+.stream {
+    display: grid;
+    gap: 12px;
+}
+
+.stream.single {
+    grid-template-columns: 1fr; /* single column for one stream */
+}
+
+.stream.two-up {
+    grid-template-columns: 2fr 1fr; 
+}
+
+
+.player {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    background: #000; /* black background for the player area */
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.hidden {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.runs {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.runs h2 {
+    margin-bottom: 12px;
+}
+
+.run {
+    background-color: lightblue;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #1e293b;
+}
+
+.run-header {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: white;
+}
+
+
+.run-header.live strong {
+    color: white; 
+}
+
+.latest-split {
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+/* Toggle button styled like a dropdown panel */
+.toggle {
+    display: block;
+    font-family: 'Mojangles';
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff;
+    background-color: #0f2235; /* slightly darker than panel for contrast */
+    border: 1px solid #1a3650;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover effect */
+.toggle:hover {
+    background-color: #1a3650;
+    color: #9bbcff;
+}
+
+/* Indent the splits inside the panel */
+.splits {
+    margin-top: 6px;
+    margin-left: 12px; /* indent for visual hierarchy */
+}
+
+.splits hidden {
+    display: none;
+}
+
+/* Sub10 End (<9 min) */
+.run.sub10 {
+    border: 2px solid gold;
+    background-color: #2c2a0f;
+}
+
+/* Stronghold < 8:30 */
+.run.sub830 {
+    border: 2px solid #d4af37; /* slightly darker gold */
+    background-color: #1f1e0a;
+}
+/* First Portal < 7 */
+.run.sub7 {
+    border: 2px solid #c0c0c0; 
+    background-color: silver;
+}
+/* Structure 2 < 5:30 */
+.run.sub530 {
+    border: 2px solid #00bfff; /* blue-ish highlight */
+    background-color: #0a1a2f;
+}
+
+#settings-panel {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    background-color: #111;
+    border: 1px solid #444;
+    padding: 10px;
+    color: white;
+    z-index: 100;
+}
+
+#settings-panel.hidden {
+    display: none;
+}
+
+#settings-panel input {
+    width: 50px;
+}
+
+#iframe-cache {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+
+
+

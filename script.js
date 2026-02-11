@@ -27,4 +27,7 @@ function getRuns() {
         console.log(runs);
     }
 
+
+    getRuns();
+    setInterval(getRuns, 10000);
 }

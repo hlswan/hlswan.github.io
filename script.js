@@ -10,7 +10,7 @@ const SPLITS = [
     { label: "Credits", key: "rsg.credits" }    
 ]
 
-function getRuns() {
+async function getRuns() {
     console.log("Getting runs...");
     let runs = await fetch(API).then(r => r.json()); //Get each run from API.
 
@@ -25,7 +25,7 @@ function getRuns() {
     if (runs.length == 0) {
         //no runs
     } else {
-        console.log(runs);
+        
     }
 
 

@@ -11,6 +11,7 @@ const SPLITS = [
 ]
 
 function getRuns() {
+    console.log("Getting runs...");
     let runs = await fetch(API).then(r => r.json()); //Get each run from API.
 
 

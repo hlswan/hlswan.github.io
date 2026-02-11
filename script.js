@@ -29,6 +29,7 @@ function getRuns() {
     }
 
 
-    getRuns();
-    setInterval(getRuns, 10000);
+    
 }
+getRuns();
+setInterval(getRuns, 10000);
